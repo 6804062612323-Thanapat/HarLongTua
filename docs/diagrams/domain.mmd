@@ -1,0 +1,97 @@
+classDiagram
+direction TB
+class Group {
+  -Map members
+  -Map transactions
+  +addMember(member) void
+  +removeMember(id) void
+  +saveTransaction(tx) void
+  +ledger() Ledger
+  +settle(strategy) Transfer[]
+  +toJSON() GroupData
+}
+class Member {
+  -String _name
+  -String _promptPayId
+  +rename(name) void
+  +setPromptPay(target) void
+  +linkUser(userId) void
+}
+class Money {
+  -int satang
+  +plus(other) Money
+  +minus(other) Money
+  +allocate(weights) Money[]
+  +format() String
+}
+class Ledger {
+  -Map balances
+  +record(debtor, creditor, amount) void
+  +balanceOf(id) Money
+}
+class Transaction {
+  <<abstract>>
+  +id String
+  +debts()* Debt[]
+  +involves(id)* boolean
+  +toJSON()* TransactionData
+  +applyTo(ledger) void
+}
+class Expense {
+  +title String
+  +amount Money
+  +split SplitStrategy
+  +shares() Map
+  +debts() Debt[]
+}
+class Payment {
+  +fromId String
+  +toId String
+  +amount Money
+  +debts() Debt[]
+}
+class SplitStrategy {
+  <<abstract>>
+  +kind*
+  +participantIds()* String[]
+  #computeShares(total)* Map
+  +resolveTotal(given) Money
+  +split(total) Map
+}
+class EqualSplit
+class ExactSplit
+class PercentSplit
+class ShareSplit
+class ItemizedSplit {
+  +resolveTotal() Money
+}
+class SettlementStrategy {
+  <<abstract>>
+  +plan(memberIds, transactions)* Transfer[]
+}
+class GreedySettlement
+class DirectSettlement
+class PromptPayPayload {
+  -String target
+  -Money amount
+  +toString() String
+  +crc16(text)$ String
+}
+Group "1" *-- "1..*" Member
+Group "1" *-- "0..*" Transaction
+Group ..> Ledger : สร้าง
+Group ..> SettlementStrategy : ใช้
+Transaction <|-- Expense
+Transaction <|-- Payment
+Expense "1" *-- "1" SplitStrategy
+SplitStrategy <|-- EqualSplit
+SplitStrategy <|-- ExactSplit
+SplitStrategy <|-- PercentSplit
+SplitStrategy <|-- ShareSplit
+SplitStrategy <|-- ItemizedSplit
+SettlementStrategy <|-- GreedySettlement
+SettlementStrategy <|-- DirectSettlement
+Transaction ..> Ledger : บันทึกลง
+Expense --> Money
+Payment --> Money
+PromptPayPayload --> Money

@@ -1,0 +1,75 @@
+classDiagram
+direction TB
+class BaseController {
+  <<abstract>>
+  +router Router
+  #registerRoutes()* void
+  +build() Router
+}
+class AuthController {
+  -register(req, res)
+  -login(req, res)
+  -startSession(res, user, status)
+}
+class GroupController {
+  -create(req, res)
+  -join(req, res)
+  -addExpense(req, res)
+  -addPayment(req, res)
+}
+class AuthService {
+  +register(email, password, name) PublicUser
+  +login(email, password) PublicUser
+  +issueToken(user) String
+  +verifyToken(token) PublicUser
+}
+class GroupService {
+  +create(user, name) Group
+  +join(user, code, memberId) Group
+  +saveExpense(user, id, input) Group
+  +recordPayment(user, id, from, to, amount) Group
+  -mutate(user, id, change) Group
+}
+class UserRepository {
+  <<interface>>
+  +create(data) UserRecord
+  +findByEmail(email) UserRecord
+  +findById(id) UserRecord
+}
+class GroupRepository {
+  <<interface>>
+  +create(data) Group
+  +findById(id) Group
+  +findByUser(userId) Group[]
+  +save(group) boolean
+  +delete(id) void
+}
+class MongoUserRepository
+class MemoryUserRepository
+class MongoGroupRepository
+class MemoryGroupRepository
+class HttpError {
+  <<abstract>>
+  +status* int
+}
+class BadRequestError
+class UnauthorizedError
+class ForbiddenError
+class NotFoundError
+class ConflictError
+BaseController <|-- AuthController
+BaseController <|-- GroupController
+AuthController --> AuthService
+GroupController --> AuthService
+GroupController --> GroupService
+AuthService --> UserRepository
+GroupService --> GroupRepository
+UserRepository <|.. MongoUserRepository
+UserRepository <|.. MemoryUserRepository
+GroupRepository <|.. MongoGroupRepository
+GroupRepository <|.. MemoryGroupRepository
+HttpError <|-- BadRequestError
+HttpError <|-- UnauthorizedError
+HttpError <|-- ForbiddenError
+HttpError <|-- NotFoundError
+HttpError <|-- ConflictError

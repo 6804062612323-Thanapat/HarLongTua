@@ -1,0 +1,71 @@
+classDiagram
+direction TB
+class Component {
+  <<abstract>>
+  +root HTMLElement
+  #template()* SafeHtml
+  #afterRender() void
+  +render() void
+  #on(type, selector, handler) void
+  +destroy() void
+}
+class Page {
+  <<abstract>>
+  #app App
+  +load() Promise
+}
+class Modal {
+  <<abstract>>
+  #title*
+  #body()* SafeHtml
+  +open() void
+  +close() void
+}
+class Tab {
+  <<abstract>>
+  +label*
+  +markup(group, userId)* SafeHtml
+}
+class App {
+  +api ApiClient
+  +router Router
+  +toast Toast
+  -show(page) void
+}
+class ApiClient {
+  -request(method, path, body)
+  +login(email, password) User
+  +addExpense(id, expense) GroupData
+}
+class Router {
+  +add(pattern, handler) Router
+  +resolve() void
+}
+class Exporter {
+  <<abstract>>
+  +export(group)* String
+}
+Component <|-- Page
+Component <|-- Modal
+Component <|-- AuthForm
+Component <|-- Toast
+Page <|-- LandingPage
+Page <|-- DashboardPage
+Page <|-- GroupPage
+Page <|-- JoinPage
+Modal <|-- ExpenseModal
+Modal <|-- MemberModal
+Modal <|-- QrModal
+Modal <|-- InviteModal
+Modal <|-- ConfirmModal
+Tab <|-- TransactionsTab
+Tab <|-- MembersTab
+Tab <|-- InsightsTab
+Exporter <|-- TextSummaryExporter
+Exporter <|-- CsvExporter
+App *-- ApiClient
+App *-- Router
+App *-- Toast
+App o-- Page
+GroupPage *-- Tab
+GroupPage ..> Exporter

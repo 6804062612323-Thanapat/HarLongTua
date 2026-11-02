@@ -1,0 +1,5 @@
+flowchart LR
+  A["เบราว์เซอร์<br/>Frontend: TypeScript + Vite<br/>Page, Modal, Tab, ApiClient"] -- "HTTPS / JSON + Cookie" --> B["Backend: Node.js + Express<br/>Controller → Service → Repository"]
+  B -- "Mongoose" --> C[("MongoDB Atlas")]
+  D["shared/domain<br/>Group, Money, SplitStrategy,<br/>Transaction, SettlementStrategy"] -.ใช้ร่วมกัน.-> A
+  D -.ใช้ร่วมกัน.-> B

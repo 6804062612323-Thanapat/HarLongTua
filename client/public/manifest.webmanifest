@@ -1,0 +1,9 @@
+{
+  "name": "หารลงตัว",
+  "short_name": "หารลงตัว",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#E9F0EA",
+  "theme_color": "#0E4B3F",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

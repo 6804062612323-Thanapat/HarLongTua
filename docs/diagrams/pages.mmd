@@ -1,0 +1,10 @@
+flowchart TD
+  L["LandingPage<br/>#/"] -- "สมัคร / เข้าสู่ระบบ" --> D["DashboardPage<br/>#/"]
+  D -- "เลือกหรือสร้างกลุ่ม" --> G["GroupPage<br/>#/groups/:id"]
+  G -- "ทุกกลุ่ม" --> D
+  J["JoinPage<br/>#/join/:code"] -- "เข้ากลุ่ม" --> G
+  G --> E["ExpenseModal"]
+  G --> Q["QrModal"]
+  G --> I["InviteModal"]
+  G --> M["MemberModal"]
+  G --> C["ConfirmModal"]
