@@ -55,8 +55,10 @@ npm start       # รันเว็บจาก dist/
 
 ## Deploy
 
-1. สร้างฐานข้อมูลฟรีบน MongoDB Atlas (M0) แล้วคัดลอก Connection String
-2. บน Render เลือก New > Blueprint แล้วเลือก repo นี้ ระบบจะอ่านค่าจาก `render.yaml`
-3. กรอก `MONGODB_URI` ในหน้า Render
+เว็บนี้ Deploy บน Vercel แบบฟรี ไม่ต้องใช้บัตรเครดิต
 
-แพ็กเกจฟรีของ Render จะหยุดเซิร์ฟเวอร์เมื่อไม่มีคนใช้ การเปิดครั้งแรกหลังจากนั้นจึงอาจรอประมาณ 1 นาที
+1. สร้างฐานข้อมูลฟรีบน MongoDB Atlas (M0) แล้วคัดลอก Connection String
+2. บน Vercel เลือก Add New > Project แล้ว Import repo นี้ ระบบจะอ่านค่าจาก `vercel.json`
+3. เพิ่ม Environment Variables ชื่อ `MONGODB_URI` และ `JWT_SECRET` (ข้อความสุ่มยาวอย่างน้อย 32 ตัวอักษร) แล้วกด Deploy
+
+ไฟล์ `api/index.js` สร้างจาก `server/serverless.ts` หลังแก้โค้ดฝั่ง Backend ให้รัน `npm run build:api` แล้ว commit ไฟล์นี้ด้วย
