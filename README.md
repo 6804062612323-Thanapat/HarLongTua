@@ -5,6 +5,8 @@
 โครงงานวิชา 040613204 Object-Oriented Programming
 ผู้จัดทำ: 6804062612323 นายธนภัจน์ ขนาบแก้ว (Section 1)
 
+**เว็บไซต์:** https://harlongtua.netlify.app
+
 ![หน้ากลุ่ม](docs/images/03-group.png)
 
 ## ความสามารถ
@@ -23,6 +25,7 @@
 | Frontend | TypeScript, Vite, คลาส Component ที่เขียนเอง |
 | Backend | Node.js, Express 5, Zod, JWT, bcrypt |
 | ฐานข้อมูล | MongoDB (Atlas M0) ผ่าน Mongoose |
+| โฮสติ้ง | Netlify (Frontend และ Serverless Function) |
 | ทดสอบ | Vitest, Supertest |
 
 ## โครงสร้างโฟลเดอร์
