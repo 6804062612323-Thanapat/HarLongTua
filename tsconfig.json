@@ -5,5 +5,5 @@
     "strict": true, "noImplicitOverride": true, "noUnusedLocals": true,
     "skipLibCheck": true, "esModuleInterop": true, "isolatedModules": true, "noEmit": true
   },
-  "include": ["shared", "server", "client/src", "tests"]
+  "include": ["shared", "server", "client/src", "tests", "netlify"]
 }

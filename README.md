@@ -55,10 +55,10 @@ npm start       # รันเว็บจาก dist/
 
 ## Deploy
 
-เว็บนี้ Deploy บน Vercel แบบฟรี ไม่ต้องใช้บัตรเครดิต
+เว็บนี้ Deploy บน Netlify แบบฟรีได้ โดยไม่ต้องใช้บัตรเครดิต
 
 1. สร้างฐานข้อมูลฟรีบน MongoDB Atlas (M0) แล้วคัดลอก Connection String
-2. บน Vercel เลือก Add New > Project แล้ว Import repo นี้ ระบบจะอ่านค่าจาก `vercel.json`
+2. บน Netlify เลือก Add new project > Import an existing project แล้วเลือก repo นี้ ระบบจะอ่านค่าจาก `netlify.toml`
 3. เพิ่ม Environment Variables ชื่อ `MONGODB_URI` และ `JWT_SECRET` (ข้อความสุ่มยาวอย่างน้อย 32 ตัวอักษร) แล้วกด Deploy
 
-ไฟล์ `api/index.js` สร้างจาก `server/serverless.ts` หลังแก้โค้ดฝั่ง Backend ให้รัน `npm run build:api` แล้ว commit ไฟล์นี้ด้วย
+โปรเจกต์นี้มีไฟล์สำหรับ Vercel (`vercel.json` และ `api/index.js`) ด้วย ถ้าใช้ Vercel และแก้โค้ดฝั่ง Backend ให้รัน `npm run build:api` แล้ว commit ไฟล์นี้
